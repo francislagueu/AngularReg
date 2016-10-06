@@ -1,3 +1,30 @@
-<h1>
-  {{title}}
-</h1>
+<md-toolbar [color]="authColor">
+  <span>AngularReg</span>
+</md-toolbar>
+<section [ngSwitch] = "isAuth">
+<h3 *ngSwitchCase="false">Choose your federated identity provider</h3>
+<md-card *ngSwitchCase="false">
+  <button md-raised-button (click)="login('google')">
+    <img width="30" src="../assets/google-logo.png" />Use Goole Account
+  </button>
+  <button md-raised-button (click)="login('facebook')">
+    <img width="30" src="../assets/facebook-logo.png" />Use Facebook Account
+  </button>
+</md-card>
+ <md-card *ngSwitchCase="true">
+   <md-card-header>
+     <img md-card-avatar [src]="user.avatar || avatar.png" />
+     <md-card-title>{{ user.name }} </md-card-title>
+     <md-card-subtitle>{{ user.email || '(no email)' }}</md-card-subtitle>
+   </md-card-header>
+ </md-card>
+ <img md-card-image src="../assets/md-banner.jpg">
+     <md-card-content>
+        <p>You are logged in using <strong>{{ user.provider }}</strong></p>
+     </md-card-content>
+     <md-card-actions>
+       <button md-raised-button (click)="logout()">
+         Logout
+       </button>
+</md-card-actions>
+</section>
